@@ -1,0 +1,36 @@
+Phase 4: Execution (How to run this now)
+
+
+Step 1: Generate the model Open your terminal in the project folder:
+Bash
+
+python train_dummy.py
+
+
+Step 2: Build the Docker image
+Bash
+
+docker build -t my-ai-startup .
+
+
+Step 3: Run the container
+Bash
+
+# We are passing the API Key as an environment variable
+docker run -d -p 80:80 -e API_SECRET="supersecretpassword" my-ai-startup
+
+----DO MANUALLY-----
+# In case of Errors 
+
+pip install fastapi uvicorn scikit-learn pandas joblib python-dotenv
+uvicorn app.main:app --reload --port 8000
+
+
+
+Step 4: Test it Now, pretend you are the client. You can use curl or Postman to hit your API.
+Bash
+
+curl -X POST "http://localhost:80/predict" \
+     -H "Content-Type: application/json" \
+     -H "X-API-KEY: supersecretpassword" \
+     -d '{"feature_1": 1.5, "feature_2": -2.0, "feature_3": 0.5}'
